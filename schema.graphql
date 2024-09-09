@@ -1,3 +1,38 @@
+type Action @entity {
+  account:                  String!
+  name:                     String!
+  jsonData:                 String!
+  transaction:              Transaction!
+
+  receiver:                 String!
+  index:                    BigInt!
+  id:                       ID!
+  rawData:                  String!
+  isNotify:                 Boolean!
+  isInput:                  Boolean!
+  block:                    Block!
+  dbOps:                    [DbOp!]! @derivedFrom(field: "action")
+  authorizations:           [Authorization!]! @derivedFrom(field: "action")
+}
+
+type DbOp @entity {
+  code:                     String!
+  tableName:                String!
+  scope:                    String!
+  newDataJson:              String!
+
+  id:                       ID!
+  transaction:              Transaction!
+  index:                    BigInt!
+  operation:                String!
+  actionIndex:              BigInt!
+  primaryKey:               String!
+  oldData:                  String!
+  newData:                  String!
+  oldDataJson:              String!
+  action:                   Action!
+}
+
 type Transaction @entity {
   id:                     ID!
   block:                  Block!
@@ -6,39 +41,6 @@ type Transaction @entity {
   netUsage:               BigInt!
   actions:                [Action!]! @derivedFrom(field: "transaction")
   dbOps:                  [DbOp!]! @derivedFrom(field: "transaction")
-}
-
-type Action @entity {
-  id:                       ID!
-  index:                    BigInt!
-  receiver:                 String!
-  account:                  String!
-  name:                     String!
-  jsonData:                 String!
-  rawData:                  String!
-  isNotify:                 Boolean!
-  isInput:                  Boolean!
-  transaction:              Transaction!
-  block:                    Block!
-  dbOps:                    [DbOp!]! @derivedFrom(field: "action")
-  authorizations:           [Authorization!]! @derivedFrom(field: "action")
-}
-
-type DbOp @entity {
-  id:                       ID!
-  index:                    BigInt!
-  operation:                String!
-  actionIndex:              BigInt!
-  code:                     String!
-  scope:                    String!
-  tableName:                String!
-  primaryKey:               String!
-  oldData:                  String!
-  newData:                  String!
-  oldDataJson:              String!
-  newDataJson:              String!
-  transaction:              Transaction!
-  action:                   Action!
 }
 
 type Authorization @entity {
