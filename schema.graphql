@@ -1,0 +1,60 @@
+type Transaction @entity {
+  id:                     ID!
+  block:                  Block!
+  index:                  BigInt!
+  elapsed:                BigInt!
+  netUsage:               BigInt!
+  actions:                [Action!]! @derivedFrom(field: "transaction")
+  dbOps:                  [DbOp!]! @derivedFrom(field: "transaction")
+}
+
+type Action @entity {
+  id:                       ID!
+  index:                    BigInt!
+  receiver:                 String!
+  account:                  String!
+  name:                     String!
+  jsonData:                 String!
+  rawData:                  String!
+  isNotify:                 Boolean!
+  isInput:                  Boolean!
+  transaction:              Transaction!
+  block:                    Block!
+  dbOps:                    [DbOp!]! @derivedFrom(field: "action")
+  authorizations:           [Authorization!]! @derivedFrom(field: "action")
+}
+
+type DbOp @entity {
+  id:                       ID!
+  index:                    BigInt!
+  operation:                String!
+  actionIndex:              BigInt!
+  code:                     String!
+  scope:                    String!
+  tableName:                String!
+  primaryKey:               String!
+  oldData:                  String!
+  newData:                  String!
+  oldDataJson:              String!
+  newDataJson:              String!
+  transaction:              Transaction!
+  action:                   Action!
+}
+
+type Authorization @entity {
+  id:                 ID!
+  actor:              String!
+  permission:         String!
+  action:             Action!
+  transaction:        Transaction!
+}
+
+type Block @entity {
+  id:                 ID!
+  date:               String!
+  time:               BigInt! #Convert as Timestamp: https://github.com/pinax-network/antelope-transactions-subgraph/issues/2
+  number:             BigInt!
+  previous:           String!
+  producer:           String!
+  transactions:       [Transaction!]! @derivedFrom(field: "block")
+}
