@@ -1,8 +1,6 @@
 .PHONY: all
 all:
 	make build
-	make create
-	make deploy
 
 .PHONY: build
 build:
@@ -10,11 +8,9 @@ build:
 
 .PHONY: deploy
 deploy:
+	graph build
+	graph create --node=http://localhost:8020 tokens
 	graph deploy --node=http://localhost:8020 tokens
-
-.PHONY: create
-create:
-	graph create --node http://localhost:8020 tokens
 
 .PHONY: publish
 publish:
