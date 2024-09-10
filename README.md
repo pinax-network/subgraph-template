@@ -11,10 +11,15 @@
   - [x] **Receiver**
 - [x] **DatabaseOperations**
 
+## Smart Contracts
+
+- `eosio.token`
+
 ## Subgraph
 
 - **API Key**: https://thegraph.com/studio/apikeys/
 - **Base URL**: https://gateway.thegraph.com/api
+- **Subgraph ID**: `<SUBGRAPH ID>`
 - **Query URL format**: `{base_url}`/api/`{api-key}`/subgraphs/id/`{subgraph_id}`
 
 ## GraphQL
