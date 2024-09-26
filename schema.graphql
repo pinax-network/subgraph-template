@@ -6,8 +6,14 @@ type Action @entity {
   rawData:                  String!
   receiver:                 String!
   index:                    BigInt!
+  globalSequence:           BigInt!
   isNotify:                 Boolean!
   isInput:                  Boolean!
+  console:                  String!
+
+  # order by
+  timestamp:                BigInt! # seconds
+  block_number:             BigInt!
 
   # derived fields
   block:                    Block!
@@ -32,6 +38,10 @@ type DbOp @entity {
   oldDataJson:              String!
   oldData:                  String!
 
+  # order by
+  timestamp:                BigInt! # seconds
+  block_number:             BigInt!
+
   # derived fields
   block:                    Block!
   transaction:              Transaction!
@@ -43,6 +53,11 @@ type Transaction @entity {
   index:                  BigInt!
   elapsed:                BigInt!
   netUsage:               BigInt!
+  scheduled:              Boolean!
+
+  # order by
+  timestamp:              BigInt! # seconds
+  block_number:           BigInt!
 
   # derived fields
   block:                  Block!
@@ -54,18 +69,17 @@ type Authorization @entity {
   id:                 ID!
   actor:              String!
   permission:         String!
+
+  # derived fields
   action:             Action!
-  transaction:        Transaction!
 }
 
 type Block @entity {
   id:                 ID!
+  number:             BigInt!
   date:               String!
   month:              String!
   year:               String!
-  time:               BigInt! #Convert as Timestamp: https://github.com/pinax-network/antelope-transactions-subgraph/issues/2
-  number:             BigInt!
-  previous:           String!
-  producer:           String!
+  timestamp:          BigInt! # seconds
   transactions:       [Transaction!]! @derivedFrom(field: "block")
 }

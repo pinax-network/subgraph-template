@@ -14,7 +14,7 @@ dataSources:
       package:
         moduleName: graph_out
         params: "(code:eosio.token || code:eosio.ram)"
-        file: ./substreams/antelope-transactions-v0.4.0.spkg
+        file: ./substreams/antelope-transactions-v0.5.0.spkg
     mapping:
       kind: substreams/graph-entities
       apiVersion: 0.0.5

@@ -19,4 +19,4 @@ publish:
 
 .PHONY: gui
 gui:
-	substreams gui ./substreams/wax-transactions-v0.3.9.spkg -e wax.substreams.pinax.network:443 graph_out -s 326292294 --params "graph_out=code:eosio.token && notif:false"
+	substreams gui ./substreams/antelope-transactions-v0.5.0.spkg -e wax.substreams.pinax.network:443 graph_out -s 326292294 --params "graph_out=code:eosio.token && notif:false"

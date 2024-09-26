@@ -6,10 +6,10 @@
 
 - [x] **Blocks**
 - [x] **Transactions**
+  - [x] **DatabaseOperations**
 - [x] **Actions**
   - [x] **Authorization**
   - [x] **Receiver**
-- [x] **DatabaseOperations**
 
 ## Smart Contracts
 
@@ -17,8 +17,8 @@
 
 ## Subgraph
 
-- **API Key**: https://thegraph.com/studio/apikeys/
-- **Base URL**: https://gateway.thegraph.com/api
+- **API Key**: <https://thegraph.com/studio/apikeys/>
+- **Base URL**: <https://gateway.thegraph.com/api>
 - **Subgraph ID**: `<SUBGRAPH ID>`
 - **Query URL format**: `{base_url}`/api/`{api-key}`/subgraphs/id/`{subgraph_id}`
 
@@ -27,13 +27,11 @@
 ```graphql
 {
   actions(
-    orderBy: block__number
+    orderBy: block_number
     orderDirection: desc
   ) {
-    block{
-      number
-      time
-    }
+    block_number
+    timestamp
     transaction {
       id
     }
@@ -51,6 +49,7 @@
 ```
 
 ### Example queries
+
 - `code:mycontract`
 - `code:tethertether && action:issue`
 - `code:eosio.token && action:transfer && (data.to:myaccount || data.from:myaccount)`
@@ -58,7 +57,9 @@
 - `code:atomicassets && action:logmint`
 
 ### Available query fields
+
 These are the expressions that can be used in queries:
+
 - `action:<action_name>` - action name
 - `code:<account>` - smart contract account name
 - `receiver:<account>` - action receiver account
